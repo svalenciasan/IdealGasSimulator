@@ -16,8 +16,13 @@ namespace visualizer {
 class NaiveBayesApp : public ci::app::App {
  public:
   NaiveBayesApp();
+  void draw() override;
+  const double kWindowSize = 875;
+  const double kMargin = 100;
+  const size_t kImageDimension = 28;
  private:
   Sketchpad sketchpad_;
+  int current_prediction_ = -1;
 };
 
 }  // namespace visualizer
