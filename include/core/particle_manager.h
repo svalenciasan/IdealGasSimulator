@@ -10,25 +10,31 @@ using glm::vec2;
 using idealgas::particle::Particle;
 
 namespace idealgas {
+
 namespace particlemanager {
-    class ParticleManager {
-    public:
-        //Constructor
-        ParticleManager();
 
-        ParticleManager(vector<Particle> particles);
+class ParticleManager {
+ public:
+  //Constructor
+  ParticleManager();
 
-        //Functions
-        vector<Particle> Update();
+  ParticleManager(vector<Particle> particles);
 
-        //Getters-Setters
-        vector<Particle> GetParticles();
+  //Functions
+  vector<Particle> Update();
 
-        size_t GetNumberOfParticles();
+  //Getters-Setters
+  vector<Particle> GetParticles();
 
-    private:
-        vector<Particle> particles_;
-        size_t number_of_particles_;
-    };
+  size_t GetNumberOfParticles();
+ private:
+  vector<Particle> particles_;
+  size_t number_of_particles_;
+  //Helper functions
+  vector<Particle> CheckParticleCollisions();
+  vec2 CalculateParticleCollisionVelocity(const Particle& particle, const Particle& second_particle) const;
+  };
+
 }//namespace particlemanager
+
 }//namespace ideal_gas

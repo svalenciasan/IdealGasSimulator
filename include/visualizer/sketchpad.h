@@ -13,6 +13,8 @@ namespace visualizer {
  */
 class Sketchpad {
  public:
+  Sketchpad(const glm::vec2& top_left_corner, size_t num_pixels_per_side,
+            double sketchpad_size);
   Sketchpad();
 
   /**
@@ -25,6 +27,12 @@ class Sketchpad {
   void Clear();
 
  private:
+  glm::vec2 top_left_corner_;
+
+  size_t num_pixels_per_side_;
+
+  /** Number of screen pixels in the width/height of one sketchpad pixel */
+  double pixel_side_length_;
 };
 
 }  // namespace visualizer
