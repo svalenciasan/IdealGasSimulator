@@ -14,10 +14,9 @@ namespace particlemanager {
 */
 ParticleManager::ParticleManager() = default;
 
-ParticleManager::ParticleManager(size_t height, size_t length){
-  height_ = height;
-  length_ = length;
-  number_of_particles_ = 0;
+ParticleManager::ParticleManager(vec2 top_left_corner, vec2 bottom_right_corner) {
+  top_left_corner_ = top_left_corner;
+  bottom_right_corner_ = bottom_right_corner;
 }
 
 /**
@@ -33,10 +32,10 @@ vector<Particle> ParticleManager::Update() {
 
 vector<Particle> ParticleManager::CheckParticleCollisions() {
   for (size_t currentIndex = 0; currentIndex < particles_.size(); currentIndex++) {
-    Particle currParticle = particles_.at(currentIndex);
+    Particle& currParticle = particles_.at(currentIndex);
 
     for (size_t compareIndex = currentIndex + 1; compareIndex < particles_.size(); compareIndex++) {
-      Particle compareParticle = particles_.at(compareIndex);
+      Particle& compareParticle = particles_.at(compareIndex);
 
       float particle_radius = currParticle.GetRadius();
       vec2 particle_position = currParticle.GetPosition();
@@ -101,29 +100,35 @@ vec2 ParticleManager::CalculateParticleCollision(const Particle& particle, const
 
   vec2 new_velocity = particle_velocity
                       - (dot(velocity_difference, position_difference)
-                         / pow(length(particle_position - second_particle_position), 2))
-                        * (particle_position - second_particle_position);
+                         / pow(length(position_difference), 2)
+                        * position_difference);
   return new_velocity;
 }
-//TODO fix the barriers
+
 vec2 ParticleManager::CalculateBarrierCollision(const Particle& particle) const {
   vec2 position = particle.GetPosition();
   vec2 velocity = particle.GetVelocity();
   float radius = particle.GetRadius();
 
-  vec2 new_velocity = velocity;
-  if (position.x <= 0 + radius && velocity.x < 0) {
-    new_velocity = vec2(velocity.x * -1, velocity.y);
-  }
-  if (position.x >= length_ - radius && velocity.x > 0) {
-    new_velocity = vec2(velocity.x * -1, velocity.y);
-  }
+  float left_bound = top_left_corner_.x;
+  float right_bound = bottom_right_corner_.x;
+  float upper_bound = top_left_corner_.y;
+  float lower_bound = bottom_right_corner_.y;
 
-  if (position.y <= 0 + radius && velocity.y < 0) {
-    vec2 new_velocity(velocity.x, velocity.y * -1);
+  vec2 new_velocity = velocity;
+  //X bounds
+  if (position.x <= left_bound + radius && new_velocity.x < 0) {
+    new_velocity = vec2(new_velocity.x * -1, new_velocity.y);
   }
-  if (position.y >= height_ - radius && velocity.y > 0) {
-    vec2 new_velocity(velocity.x, velocity.y * -1);
+  if (position.x >= right_bound - radius && new_velocity.x > 0) {
+    new_velocity = vec2(new_velocity.x * -1, new_velocity.y);
+  }
+  //Y bounds
+  if (position.y >= lower_bound - radius && new_velocity.y > 0) {
+    new_velocity = vec2(new_velocity.x, new_velocity.y * -1);
+  }
+  if (position.y <= upper_bound + radius && new_velocity.y < 0) {
+    new_velocity = vec2(new_velocity.x, new_velocity.y * -1);
   }
   return new_velocity;
 }

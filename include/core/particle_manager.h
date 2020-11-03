@@ -18,10 +18,7 @@ class ParticleManager {
  public:
   //Constructor
   ParticleManager();
-
-  //ParticleManager(vector<Particle> particles);
-
-  ParticleManager(size_t height, size_t length);
+  ParticleManager(vec2 top_left_corner, vec2 bottom_right_corner);
 
   //Functions
   vector<Particle> Update();
@@ -36,14 +33,12 @@ class ParticleManager {
   //Getters-Setters
   vector<Particle> GetParticles() const;
   size_t GetNumberOfParticles() const;
-  size_t GetHeight() const;
-  size_t GetLength() const;
 
  private:
   vector<Particle> particles_;
-  size_t number_of_particles_;
-  size_t height_;
-  size_t length_;
+  size_t number_of_particles_ = 0;
+  vec2 top_left_corner_;
+  vec2 bottom_right_corner_;
   //Helper functions
   /**
    * Calculates the resulting velocity of a collision between 2 particles.
