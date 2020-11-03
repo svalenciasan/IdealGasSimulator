@@ -1,6 +1,6 @@
 #include <visualizer/naive_bayes_app.h>
 
-using naivebayes::visualizer::NaiveBayesApp;
+using idealgas::visualizer::NaiveBayesApp;
 
 void prepareSettings(NaiveBayesApp::Settings* settings) {
   settings->setResizable(false);

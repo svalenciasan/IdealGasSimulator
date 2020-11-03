@@ -1,8 +1,14 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
+#include "core/particle_manager.h"
+#include "core/particle.h"
 
-namespace naivebayes {
+using idealgas::particle::Particle;
+using idealgas::particlemanager::ParticleManager;
+using glm::vec2;
+
+namespace idealgas {
 
 namespace visualizer {
 
@@ -13,7 +19,8 @@ namespace visualizer {
  */
 class Sketchpad {
  public:
-  Sketchpad(const glm::vec2& top_left_corner, size_t num_pixels_per_side,
+  //const ParticleManager& particleManager
+  Sketchpad(const vec2& top_left_corner, size_t num_pixels_per_side,
             double sketchpad_size);
   Sketchpad();
 
@@ -27,10 +34,9 @@ class Sketchpad {
   void Clear();
 
  private:
-  glm::vec2 top_left_corner_;
-
+  ParticleManager particleManager_;
+  vec2 top_left_corner_;
   size_t num_pixels_per_side_;
-
   /** Number of screen pixels in the width/height of one sketchpad pixel */
   double pixel_side_length_;
 };

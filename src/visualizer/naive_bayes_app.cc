@@ -2,7 +2,7 @@
 #include <sstream>
 
 using std::stringstream;
-namespace naivebayes {
+namespace idealgas {
 
 namespace visualizer {
 

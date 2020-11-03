@@ -1,7 +1,10 @@
 #include <visualizer/sketchpad.h>
+#include "core/particle_manager.h"
 #include <sstream>
 
-namespace naivebayes {
+using idealgas::particlemanager::ParticleManager;
+
+namespace idealgas {
 
 namespace visualizer {
 
@@ -13,7 +16,9 @@ Sketchpad::Sketchpad(const vec2& top_left_corner, size_t num_pixels_per_side,
     : top_left_corner_(top_left_corner),
       num_pixels_per_side_(num_pixels_per_side),
       pixel_side_length_(sketchpad_size / num_pixels_per_side) {
+  particleManager_ = ParticleManager(num_pixels_per_side, num_pixels_per_side);
 }
+Sketchpad::Sketchpad() {}
 
 void Sketchpad::Draw() const {
   for (size_t row = 0; row < num_pixels_per_side_; ++row) {

@@ -5,7 +5,7 @@
 #include "cinder/gl/gl.h"
 #include "sketchpad.h"
 
-namespace naivebayes {
+namespace idealgas {
 
 namespace visualizer {
 
@@ -22,7 +22,6 @@ class NaiveBayesApp : public ci::app::App {
   const size_t kImageDimension = 28;
  private:
   Sketchpad sketchpad_;
-  int current_prediction_ = -1;
 };
 
 }  // namespace visualizer
