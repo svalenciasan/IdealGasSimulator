@@ -26,6 +26,8 @@ vector<Particle> ParticleManager::Update() {
   //Updates all particle positions
   for(Particle& particle : particles_) {
     particle.Update();
+//    CalculateBarrierCollision(particle);
+//    particle.SetPosition(FixOvershoot(particle));
   }
   return particles_;
 }
@@ -73,6 +75,14 @@ vector<Particle> ParticleManager::CheckBarrierCollisions() {
 vector<Particle> ParticleManager::AddParticle(const Particle& particle) {
   particles_.push_back(particle);
   number_of_particles_++;
+  return particles_;
+}
+
+vector<Particle> ParticleManager::ClearParticles() {
+  while (number_of_particles_ > 0){
+    particles_.pop_back();
+    number_of_particles_--;
+  }
   return particles_;
 }
 /**
@@ -130,9 +140,36 @@ vec2 ParticleManager::CalculateBarrierCollision(const Particle& particle) const 
   if (position.y <= upper_bound + radius && new_velocity.y < 0) {
     new_velocity = vec2(new_velocity.x, new_velocity.y * -1);
   }
+
   return new_velocity;
 }
 
+vec2 ParticleManager::FixOvershoot(const Particle& particle) const {
+  vec2 position = particle.GetPosition();
+  float radius = particle.GetRadius();
+
+  float left_bound = top_left_corner_.x;
+  float right_bound = bottom_right_corner_.x;
+  float upper_bound = top_left_corner_.y;
+  float lower_bound = bottom_right_corner_.y;
+
+  vec2 new_position = position;
+  //X bounds
+  if (position.x <= left_bound + radius) {
+    new_position = vec2(left_bound + (left_bound - position.x) + radius, new_position.y);
+  }
+  if (position.x >= right_bound - radius) {
+    new_position = vec2(right_bound - (position.x - right_bound) - radius, new_position.y);
+  }
+  //Y bounds
+  if (position.y >= lower_bound - radius) {
+    new_position = vec2(new_position.x, lower_bound - (new_position.y - lower_bound) - radius);
+  }
+  if (position.y <= upper_bound + radius) {
+    new_position = vec2(new_position.x, upper_bound + (upper_bound - new_position.y) + radius);  }
+
+  return new_position;
+}
 }//namespace particlemanager
 
 }//namespace idealgas

@@ -34,6 +34,7 @@ class Sketchpad {
    */
   void Clear();
 
+  void AddParticle(float radius, vec2 position, vec2 velocity);
  private:
   ParticleManager particleManager_;
   vec2 top_left_corner_;

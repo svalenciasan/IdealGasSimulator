@@ -21,6 +21,29 @@ void NaiveBayesApp::draw() {
 
     sketchpad_.Draw();
 }
+
+void NaiveBayesApp::keyDown(ci::app::KeyEvent event) {
+  vec2 velocity;
+  float radius;
+
+  switch (event.getCode()) {
+    case ci::app::KeyEvent::KEY_LEFT:
+      velocity = vec2(-2,-3);
+      radius = 10;
+      sketchpad_.AddParticle(radius, vec2(kMargin + radius, kMargin + radius), velocity);
+      break;
+
+    case ci::app::KeyEvent::KEY_RIGHT:
+      velocity = vec2(-3,-2);
+      radius = 20;
+      sketchpad_.AddParticle(radius, vec2(kMargin + radius, kMargin + radius), velocity);
+      break;
+
+    case ci::app::KeyEvent::KEY_DELETE:
+      sketchpad_.Clear();
+      break;
+  }
+}
 }  // namespace visualizer
 
 }  // namespace naivebayes

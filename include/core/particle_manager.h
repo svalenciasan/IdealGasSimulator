@@ -2,7 +2,6 @@
 
 #include "cinder/gl/gl.h"
 #include "core/particle.h"
-#include "core/container.h"
 #include <vector>
 
 using std::string;
@@ -29,7 +28,7 @@ class ParticleManager {
   vector<Particle> CheckParticleCollisions();
   vector<Particle> CheckBarrierCollisions();
   vector<Particle> AddParticle(const Particle& particle);
-
+  vector<Particle> ClearParticles();
   //Getters-Setters
   vector<Particle> GetParticles() const;
   size_t GetNumberOfParticles() const;
@@ -48,6 +47,7 @@ class ParticleManager {
    */
   vec2 CalculateParticleCollision(const Particle& particle, const Particle& second_particle) const;
   vec2 CalculateBarrierCollision(const Particle& particle) const;
+  vec2 FixOvershoot(const Particle& particle) const;
   };
 
 }//namespace particlemanager

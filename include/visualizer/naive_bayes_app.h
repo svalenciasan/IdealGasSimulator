@@ -18,6 +18,8 @@ class NaiveBayesApp : public ci::app::App {
   NaiveBayesApp();
   void update() override;
   void draw() override;
+  void keyDown(ci::app::KeyEvent event) override;
+
   const double kWindowSize = 875;
   const double kMargin = 100;
   const size_t kImageDimension = 28;
