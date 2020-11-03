@@ -16,6 +16,7 @@ namespace visualizer {
 class NaiveBayesApp : public ci::app::App {
  public:
   NaiveBayesApp();
+  void update() override;
   void draw() override;
   const double kWindowSize = 875;
   const double kMargin = 100;

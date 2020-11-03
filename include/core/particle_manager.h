@@ -34,8 +34,8 @@ class ParticleManager {
   vector<Particle> AddParticle(const Particle& particle);
 
   //Getters-Setters
-  vector<Particle> GetParticles();
-  size_t GetNumberOfParticles();
+  vector<Particle> GetParticles() const;
+  size_t GetNumberOfParticles() const;
   size_t GetHeight() const;
   size_t GetLength() const;
 

@@ -11,6 +11,9 @@ NaiveBayesApp::NaiveBayesApp()
                  kWindowSize - 2 * kMargin) {
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 }
+void NaiveBayesApp::update() {
+  sketchpad_.Update();
+}
 
 void NaiveBayesApp::draw() {
     ci::Color8u background_color(255, 246, 148);  // light yellow

@@ -17,16 +17,15 @@ ParticleManager::ParticleManager() = default;
 ParticleManager::ParticleManager(size_t height, size_t length){
   height_ = height;
   length_ = length;
+  number_of_particles_ = 0;
 }
 
 /**
 * Public Functions
 */
 vector<Particle> ParticleManager::Update() {
-//  //Updates the velocity of all particles
-//  CheckParticleCollisions();
   //Updates all particle positions
-  for(Particle particle : particles_) {
+  for(Particle& particle : particles_) {
     particle.Update();
   }
   return particles_;
@@ -66,7 +65,7 @@ vector<Particle> ParticleManager::CheckParticleCollisions() {
 }
 
 vector<Particle> ParticleManager::CheckBarrierCollisions() {
-  for (Particle particle : particles_) {
+  for (Particle& particle : particles_) {
     particle.SetVelocity(CalculateBarrierCollision(particle));
   }
   return particles_;
@@ -74,15 +73,16 @@ vector<Particle> ParticleManager::CheckBarrierCollisions() {
 
 vector<Particle> ParticleManager::AddParticle(const Particle& particle) {
   particles_.push_back(particle);
+  number_of_particles_++;
   return particles_;
 }
 /**
 * Getters-Setters
 */
-vector<Particle> ParticleManager::GetParticles() {
+vector<Particle> ParticleManager::GetParticles() const{
   return particles_;
 }
-size_t ParticleManager::GetNumberOfParticles() {
+size_t ParticleManager::GetNumberOfParticles() const{
   return number_of_particles_;
 }
 

@@ -24,6 +24,7 @@ class Sketchpad {
             double sketchpad_size);
   Sketchpad();
 
+  void Update();
   /**
    * Displays the current state of the sketchpad in the Cinder application.
    */
