@@ -16,7 +16,7 @@ namespace particlemanager {
 class ParticleManager {
  public:
   //Constructor
-  ParticleManager();
+  ParticleManager() = default;
   ParticleManager(vec2 top_left_corner, vec2 bottom_right_corner);
 
   //Functions

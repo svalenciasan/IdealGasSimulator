@@ -12,8 +12,6 @@ namespace particlemanager {
 /**
 * Constructors
 */
-ParticleManager::ParticleManager() = default;
-
 ParticleManager::ParticleManager(vec2 top_left_corner, vec2 bottom_right_corner) {
   top_left_corner_ = top_left_corner;
   bottom_right_corner_ = bottom_right_corner;

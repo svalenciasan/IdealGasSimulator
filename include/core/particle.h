@@ -12,7 +12,7 @@ namespace particle {
 class Particle {
  public:
   //Constructors
-  Particle();
+  Particle() = default;
   Particle(float radius, vec2& position, vec2& velocity);
   //Functions
   void Update();
@@ -25,13 +25,7 @@ class Particle {
   vec2 SetPosition(const vec2& position);
 
   private:
-  constexpr static const float kDefaultXPos = 0;
-  constexpr static const float kDefaultYPos = 0;
-  constexpr static const float kDefaultXVelocity = 1;
-  constexpr static const float kDefaultYVelocity = 1;
-
   const float kRadius;
-
   vec2 position_;
   vec2 velocity_;
 };
