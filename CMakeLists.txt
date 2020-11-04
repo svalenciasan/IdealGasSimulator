@@ -57,9 +57,7 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
                             src/visualizer/sketchpad.cc)
 
 list(APPEND TEST_FILES tests/test_particle.cpp)
-
-add_executable(train-model apps/train_model_main.cc ${CORE_SOURCE_FILES})
-target_include_directories(train-model PRIVATE include)
+list(APPEND TEST_FILES tests/test_particle_manager.cpp)
 
 ci_make_app(
         APP_NAME        sketchpad-classifier
