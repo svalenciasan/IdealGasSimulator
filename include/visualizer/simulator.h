@@ -17,12 +17,12 @@ namespace visualizer {
  * mouse events. Furthermore, the sketchpad can output its current state in the
  * same format as the Naive Bayes image data files.
  */
-class Sketchpad {
+class Simulator {
  public:
   //const ParticleManager& particleManager
-  Sketchpad(const vec2& top_left_corner, size_t num_pixels_per_side,
+  Simulator(const vec2& top_left_corner, size_t num_pixels_per_side,
             double sketchpad_size);
-  Sketchpad();
+  Simulator();
 
   void Update();
   /**

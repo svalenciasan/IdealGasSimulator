@@ -1,6 +1,8 @@
-#include <visualizer/sketchpad.h>
-#include "core/particle_manager.h"
+#include <visualizer/simulator.h>
+
 #include <sstream>
+
+#include "core/particle_manager.h"
 
 using idealgas::particlemanager::ParticleManager;
 
@@ -11,7 +13,7 @@ namespace visualizer {
 using glm::vec2;
 using std::stringstream;
 
-Sketchpad::Sketchpad(const vec2& top_left_corner, size_t num_pixels_per_side,
+Simulator::Simulator(const vec2& top_left_corner, size_t num_pixels_per_side,
                      double sketchpad_size)
     : top_left_corner_(top_left_corner),
       num_pixels_per_side_(num_pixels_per_side),
@@ -19,15 +21,15 @@ Sketchpad::Sketchpad(const vec2& top_left_corner, size_t num_pixels_per_side,
   vec2 bottom_right_corner = top_left_corner_ + vec2(num_pixels_per_side_ * pixel_side_length_, num_pixels_per_side_ * pixel_side_length_);
   particleManager_ = ParticleManager(top_left_corner_, bottom_right_corner);
 }
-Sketchpad::Sketchpad() {}
+Simulator::Simulator() {}
 
-void Sketchpad::Update() {
+void Simulator::Update() {
   particleManager_.CheckBarrierCollisions();
   particleManager_.CheckParticleCollisions();
   particleManager_.Update();
 }
 
-void Sketchpad::Draw() const {
+void Simulator::Draw() const {
   vec2 pixel_bottom_right = top_left_corner_ + vec2(num_pixels_per_side_ * pixel_side_length_, num_pixels_per_side_ * pixel_side_length_);
   ci::Rectf pixel_bounding_box(top_left_corner_, pixel_bottom_right);
 
@@ -42,11 +44,11 @@ void Sketchpad::Draw() const {
   }
 }
 
-void Sketchpad::Clear() {
+void Simulator::Clear() {
   particleManager_.ClearParticles();
 }
 
-void Sketchpad::AddParticle(float radius, vec2 position, vec2 velocity) {
+void Simulator::AddParticle(float radius, vec2 position, vec2 velocity) {
   Particle particle(radius, position, velocity);
   particleManager_.AddParticle(particle);
 }

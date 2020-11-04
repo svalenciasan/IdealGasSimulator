@@ -1,4 +1,5 @@
-#include <visualizer/naive_bayes_app.h>
+#include <visualizer/ideal_gas_app.h>
+
 #include <sstream>
 
 using std::stringstream;
@@ -6,23 +7,23 @@ namespace idealgas {
 
 namespace visualizer {
 
-NaiveBayesApp::NaiveBayesApp()
-    : sketchpad_(glm::vec2(kMargin, kMargin), kImageDimension,
+IdealGasApp::IdealGasApp()
+    : simulator_(glm::vec2(kMargin, kMargin), kImageDimension,
                  kWindowSize - 2 * kMargin) {
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 }
-void NaiveBayesApp::update() {
-  sketchpad_.Update();
+void IdealGasApp::update() {
+  simulator_.Update();
 }
 
-void NaiveBayesApp::draw() {
+void IdealGasApp::draw() {
     ci::Color8u background_color(255, 246, 148);  // light yellow
     ci::gl::clear(background_color);
 
-    sketchpad_.Draw();
+    simulator_.Draw();
 }
 
-void NaiveBayesApp::keyDown(ci::app::KeyEvent event) {
+void IdealGasApp::keyDown(ci::app::KeyEvent event) {
   vec2 velocity;
   float radius;
 
@@ -30,17 +31,17 @@ void NaiveBayesApp::keyDown(ci::app::KeyEvent event) {
     case ci::app::KeyEvent::KEY_LEFT:
       velocity = vec2(-2,-3);
       radius = 10;
-      sketchpad_.AddParticle(radius, vec2(kMargin + radius, kMargin + radius), velocity);
+      simulator_.AddParticle(radius, vec2(kMargin + radius, kMargin + radius), velocity);
       break;
 
     case ci::app::KeyEvent::KEY_RIGHT:
       velocity = vec2(-3,-2);
       radius = 20;
-      sketchpad_.AddParticle(radius, vec2(kMargin + radius, kMargin + radius), velocity);
+      simulator_.AddParticle(radius, vec2(kMargin + radius, kMargin + radius), velocity);
       break;
 
     case ci::app::KeyEvent::KEY_DELETE:
-      sketchpad_.Clear();
+      simulator_.Clear();
       break;
   }
 }

@@ -3,7 +3,7 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
-#include "sketchpad.h"
+#include "simulator.h"
 
 namespace idealgas {
 
@@ -13,9 +13,9 @@ namespace visualizer {
  * Allows a user to draw a digit on a sketchpad and uses Naive Bayes to
  * classify it.
  */
-class NaiveBayesApp : public ci::app::App {
+class IdealGasApp : public ci::app::App {
  public:
-  NaiveBayesApp();
+  IdealGasApp();
   void update() override;
   void draw() override;
   void keyDown(ci::app::KeyEvent event) override;
@@ -24,7 +24,7 @@ class NaiveBayesApp : public ci::app::App {
   const double kMargin = 100;
   const size_t kImageDimension = 28;
  private:
-  Sketchpad sketchpad_;
+  Simulator simulator_;
 };
 
 }  // namespace visualizer
