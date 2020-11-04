@@ -3,7 +3,7 @@
 #include <core/particle.h>
 using idealgas::particle::Particle;
 
-TEST_CASE("Update", "[update]") {
+TEST_CASE("Update particle", "[update][particle]") {
     SECTION("Update <0,0> velocity") {
     vec2 position(0,0);
     vec2 velocity(0,0);
