@@ -60,14 +60,14 @@ list(APPEND TEST_FILES tests/test_particle.cpp)
 list(APPEND TEST_FILES tests/test_particle_manager.cpp)
 
 ci_make_app(
-        APP_NAME        sketchpad-classifier
+        APP_NAME        simulator
         CINDER_PATH     ${CINDER_PATH}
         SOURCES         apps/cinder_app_main.cc ${SOURCE_FILES}
         INCLUDES        include
 )
 
 ci_make_app(
-        APP_NAME        naive-bayes-test
+        APP_NAME        ideal-gas-test
         CINDER_PATH     ${CINDER_PATH}
         SOURCES         tests/test_main.cc ${SOURCE_FILES} ${TEST_FILES}
         INCLUDES        include
@@ -75,5 +75,5 @@ ci_make_app(
 )
 
 if(MSVC)
-    set_property(TARGET naive-bayes-test APPEND_STRING PROPERTY LINK_FLAGS " /SUBSYSTEM:CONSOLE")
+    set_property(TARGET ideal-gas-test APPEND_STRING PROPERTY LINK_FLAGS " /SUBSYSTEM:CONSOLE")
 endif()
