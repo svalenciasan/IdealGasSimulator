@@ -315,7 +315,7 @@ TEST_CASE("Check barrier collision", "[checkbarriercollision]") {
   }
 }
 
-TEST_CASE("Check particle collision", "[checkparticlecollision]") {
+TEST_CASE("Check particle collision, same mass", "[particlecollision]") {
   vec2 topLeftCorner(0,0);
   vec2 topRightCorner(100,100);
   ParticleManager particleManager(topLeftCorner, topRightCorner);
@@ -450,6 +450,101 @@ TEST_CASE("Check particle collision", "[checkparticlecollision]") {
   }
 }
 
+TEST_CASE("Check particle collision different masses", "[particlecollision][mass]") {
+  vec2 topLeftCorner(0,0);
+  vec2 topRightCorner(100,100);
+  ParticleManager particleManager(topLeftCorner, topRightCorner);
+  SECTION("Two item list touching but opposite velocities") {
+    vec2 position(20,20);
+    vec2 velocity(1,1);
+    Particle particle(10, 10, position, velocity);
+    particleManager.AddParticle(particle);
+
+    vec2 position2(15,15);
+    vec2 velocity2(-1,-1);
+    Particle particle2(10, 20, position2, velocity2);
+    particleManager.AddParticle(particle2);
+
+    particleManager.CheckParticleCollisions();
+
+    REQUIRE(particleManager.GetParticles().size() == 2);
+
+    REQUIRE(particleManager.GetParticles().at(0).GetVelocity() == particle.GetVelocity());
+    REQUIRE(particleManager.GetParticles().at(1).GetVelocity() == particle2.GetVelocity());
+
+    REQUIRE(particleManager.GetParticles().at(0).GetPosition() == particle.GetPosition());
+    REQUIRE(particleManager.GetParticles().at(1).GetPosition() == particle2.GetPosition());
+  }
+  SECTION("Two particles colliding opposite") {
+    vec2 position(20,20);
+    vec2 velocity(-1,-1);
+    Particle particle(10, 10, position, velocity);
+    particleManager.AddParticle(particle);
+
+    vec2 position2(15,15);
+    vec2 velocity2(1,1);
+    Particle particle2(10, 20, position2, velocity2);
+    particleManager.AddParticle(particle2);
+
+    particleManager.CheckParticleCollisions();
+
+    REQUIRE(particleManager.GetParticles().size() == 2);
+
+    REQUIRE(particleManager.GetParticles().at(0).GetVelocity() == vec2(1.66666675, 1.66666675));
+    REQUIRE(particleManager.GetParticles().at(1).GetVelocity() == vec2(-0.333333373,   -0.333333373));
+
+    REQUIRE(particleManager.GetParticles().at(0).GetPosition() == particle.GetPosition());
+    REQUIRE(particleManager.GetParticles().at(1).GetPosition() == particle2.GetPosition());
+  }
+  SECTION("Two particles colliding different velocities") {
+    vec2 position(20,20);
+    vec2 velocity(-1,-3);
+    Particle particle(10, 10, position, velocity);
+    particleManager.AddParticle(particle);
+
+    vec2 position2(15,15);
+    vec2 velocity2(2,1);
+    Particle particle2(10, 20, position2, velocity2);
+    particleManager.AddParticle(particle2);
+
+    particleManager.CheckParticleCollisions();
+
+    REQUIRE(particleManager.GetParticles().size() == 2);
+
+    REQUIRE(particleManager.GetParticles().at(0).GetVelocity() == vec2(3.66666698, 1.66666698));
+    REQUIRE(particleManager.GetParticles().at(1).GetVelocity() == vec2(-0.333333492, -1.33333349));
+
+    REQUIRE(particleManager.GetParticles().at(0).GetPosition() == particle.GetPosition());
+    REQUIRE(particleManager.GetParticles().at(1).GetPosition() == particle2.GetPosition());
+  }
+  SECTION("Three particles colliding different velocities") {
+    vec2 position(20,20);
+    vec2 velocity(-1,-3);
+    Particle particle(10, 10, position, velocity);
+    particleManager.AddParticle(particle);
+
+    vec2 position2(15,15);
+    vec2 velocity2(-4,1);
+    Particle particle2(10, 20, position2, velocity2);
+    particleManager.AddParticle(particle2);
+
+    vec2 position3(12,12);
+    vec2 velocity3(5,-6);
+    Particle particle3(10, 30, position2, velocity2);
+    particleManager.AddParticle(particle3);
+
+    particleManager.CheckParticleCollisions();
+
+    REQUIRE(particleManager.GetParticles().size() == 3);
+
+    REQUIRE(particleManager.GetParticles().at(0).GetVelocity() == vec2(-0.333333313, -2.33333325));
+    REQUIRE(particleManager.GetParticles().at(1).GetVelocity() == vec2(-4.33333349, 0.666666627));
+    REQUIRE(particleManager.GetParticles().at(2).GetVelocity() == vec2(-4,1));
+
+    REQUIRE(particleManager.GetParticles().at(0).GetPosition() == particle.GetPosition());
+    REQUIRE(particleManager.GetParticles().at(1).GetPosition() == particle2.GetPosition());
+  }
+}
 
 TEST_CASE("Clear particles", "[clear]") {
   vec2 topLeftCorner(0, 0);
