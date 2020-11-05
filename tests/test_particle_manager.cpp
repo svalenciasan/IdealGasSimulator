@@ -326,7 +326,7 @@ TEST_CASE("Check particle collision", "[checkparticlecollision]") {
   SECTION("Single item list in bounds") {
     vec2 position(20,20);
     vec2 velocity(1,1);
-    Particle particle(10, position, velocity);
+    Particle particle(10, 10, position, velocity);
     particleManager.AddParticle(particle);
 
     particleManager.CheckParticleCollisions();
@@ -340,12 +340,12 @@ TEST_CASE("Check particle collision", "[checkparticlecollision]") {
   SECTION("Two item list not touching") {
     vec2 position(20,20);
     vec2 velocity(1,1);
-    Particle particle(10, position, velocity);
+    Particle particle(10, 10, position, velocity);
     particleManager.AddParticle(particle);
 
     vec2 position2(2,2);
     vec2 velocity2(2,2);
-    Particle particle2(10, position2, velocity2);
+    Particle particle2(10, 10, position2, velocity2);
     particleManager.AddParticle(particle2);
 
     particleManager.CheckParticleCollisions();
@@ -361,12 +361,12 @@ TEST_CASE("Check particle collision", "[checkparticlecollision]") {
   SECTION("Two item list touching but opposite velocities") {
     vec2 position(20,20);
     vec2 velocity(1,1);
-    Particle particle(10, position, velocity);
+    Particle particle(10, 10, position, velocity);
     particleManager.AddParticle(particle);
 
     vec2 position2(15,15);
     vec2 velocity2(-1,-1);
-    Particle particle2(10, position2, velocity2);
+    Particle particle2(10, 10, position2, velocity2);
     particleManager.AddParticle(particle2);
 
     particleManager.CheckParticleCollisions();
@@ -382,12 +382,12 @@ TEST_CASE("Check particle collision", "[checkparticlecollision]") {
   SECTION("Two particles colliding opposite") {
     vec2 position(20,20);
     vec2 velocity(-1,-1);
-    Particle particle(10, position, velocity);
+    Particle particle(10, 10, position, velocity);
     particleManager.AddParticle(particle);
 
     vec2 position2(15,15);
     vec2 velocity2(1,1);
-    Particle particle2(10, position2, velocity2);
+    Particle particle2(10, 10, position2, velocity2);
     particleManager.AddParticle(particle2);
 
     particleManager.CheckParticleCollisions();
@@ -400,15 +400,15 @@ TEST_CASE("Check particle collision", "[checkparticlecollision]") {
     REQUIRE(particleManager.GetParticles().at(0).GetPosition() == particle.GetPosition());
     REQUIRE(particleManager.GetParticles().at(1).GetPosition() == particle2.GetPosition());
   }
-  SECTION("Two particles colliding complex") {
+  SECTION("Two particles colliding different velocities") {
     vec2 position(20,20);
     vec2 velocity(-1,-3);
-    Particle particle(10, position, velocity);
+    Particle particle(10, 10, position, velocity);
     particleManager.AddParticle(particle);
 
     vec2 position2(15,15);
     vec2 velocity2(2,1);
-    Particle particle2(10, position2, velocity2);
+    Particle particle2(10, 10, position2, velocity2);
     particleManager.AddParticle(particle2);
 
     particleManager.CheckParticleCollisions();
@@ -421,20 +421,20 @@ TEST_CASE("Check particle collision", "[checkparticlecollision]") {
     REQUIRE(particleManager.GetParticles().at(0).GetPosition() == particle.GetPosition());
     REQUIRE(particleManager.GetParticles().at(1).GetPosition() == particle2.GetPosition());
   }
-  SECTION("Three particles colliding complex") {
+  SECTION("Three particles colliding different velocities") {
     vec2 position(20,20);
     vec2 velocity(-1,-3);
-    Particle particle(10, position, velocity);
+    Particle particle(10, 10, position, velocity);
     particleManager.AddParticle(particle);
 
     vec2 position2(15,15);
     vec2 velocity2(-4,1);
-    Particle particle2(10, position2, velocity2);
+    Particle particle2(10, 10, position2, velocity2);
     particleManager.AddParticle(particle2);
 
     vec2 position3(12,12);
     vec2 velocity3(5,-6);
-    Particle particle3(10, position2, velocity2);
+    Particle particle3(10, 10, position2, velocity2);
     particleManager.AddParticle(particle3);
 
     particleManager.CheckParticleCollisions();

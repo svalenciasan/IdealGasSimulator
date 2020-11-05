@@ -48,8 +48,8 @@ void Simulator::Clear() {
   particleManager_.ClearParticles();
 }
 
-void Simulator::AddParticle(float radius, vec2 position, vec2 velocity) {
-  Particle particle(radius, position, velocity);
+void Simulator::AddParticle(float radius, float mass, vec2 position, vec2 velocity) {
+  Particle particle(radius, mass, position, velocity);
   particleManager_.AddParticle(particle);
 }
 }  // namespace visualizer

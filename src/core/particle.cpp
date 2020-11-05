@@ -6,7 +6,12 @@ namespace particle {
 /**
  * Constructors
  */
-Particle::Particle(float radius, vec2& position, vec2& velocity) : kRadius(radius) {
+Particle::Particle(float radius, vec2& position, vec2& velocity) : kRadius(radius), kMass(1.008f) {
+  position_ = position;
+  velocity_ = velocity;
+}
+
+Particle::Particle(float radius, float mass, vec2& position, vec2& velocity) : kRadius(radius), kMass(mass) {
   position_ = position;
   velocity_ = velocity;
 }
@@ -31,6 +36,15 @@ vec2 Particle::GetVelocity() const{
 
 float Particle::GetRadius() const{
   return kRadius;
+}
+
+float Particle::GetMass() const {
+  return kMass;
+}
+
+string Particle::SetColor(const string& color) {
+  color_ = color;
+  return color_;
 }
 
 vec2 Particle::SetPosition(const vec2& position) {

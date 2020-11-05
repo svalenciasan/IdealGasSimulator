@@ -99,15 +99,18 @@ size_t ParticleManager::GetNumberOfParticles() const{
 vec2 ParticleManager::CalculateParticleCollision(const Particle& particle, const Particle& second_particle) const{
   vec2 particle_position = particle.GetPosition();
   vec2 particle_velocity = particle.GetVelocity();
+  float particle_mass = particle.GetMass();
 
   vec2 second_particle_position = second_particle.GetPosition();
   vec2 second_particle_velocity = second_particle.GetVelocity();
+  float second_particle_mass = second_particle.GetMass();
 
   vec2 velocity_difference = particle_velocity - second_particle_velocity;
   vec2 position_difference = particle_position - second_particle_position;
 
   vec2 new_velocity = particle_velocity
-                      - (dot(velocity_difference, position_difference)
+                      - (2 * second_particle_mass) / (particle_mass + second_particle_mass)
+                      * (dot(velocity_difference, position_difference)
                          / pow(length(position_difference), 2)
                         * position_difference);
   return new_velocity;
