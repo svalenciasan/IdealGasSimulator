@@ -2,8 +2,6 @@
 
 #include <sstream>
 
-#include "core/particle_manager.h"
-
 using idealgas::particlemanager::ParticleManager;
 
 namespace idealgas {
@@ -40,6 +38,8 @@ void Simulator::Draw() const {
   ci::gl::drawStrokedRect(pixel_bounding_box);
 
   for (Particle particle : particleManager_.GetParticles()) {
+    string color = particle.GetColor();
+    ci::gl::color(ci::Color(color.c_str()));
     ci::gl::drawSolidCircle(particle.GetPosition(), particle.GetRadius());
   }
 }
@@ -50,6 +50,12 @@ void Simulator::Clear() {
 
 void Simulator::AddParticle(float radius, float mass, vec2 position, vec2 velocity) {
   Particle particle(radius, mass, position, velocity);
+  particleManager_.AddParticle(particle);
+}
+
+void Simulator::AddParticle(float radius, float mass, vec2 position, vec2 velocity, string color) {
+  Particle particle(radius, mass, position, velocity);
+  particle.SetColor(color);
   particleManager_.AddParticle(particle);
 }
 }  // namespace visualizer

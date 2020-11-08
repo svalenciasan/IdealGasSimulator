@@ -42,6 +42,10 @@ float Particle::GetMass() const {
   return kMass;
 }
 
+string Particle::GetColor() const {
+  return color_;
+}
+
 string Particle::SetColor(const string& color) {
   color_ = color;
   return color_;
