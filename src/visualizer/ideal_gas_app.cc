@@ -6,9 +6,7 @@ using std::stringstream;
 namespace idealgas {
 
 namespace visualizer {
-IdealGasApp::IdealGasApp() : simulator_(vec2(kMargin, kMargin),
-                 vec2(kMargin + (kWindowSize - 2 * kMargin),
-                      kMargin + (kWindowSize - 2 * kMargin))) {
+IdealGasApp::IdealGasApp() : simulator_(kTopLeftCorner, kBottomRightCorner) {
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 }
 
@@ -34,7 +32,8 @@ void IdealGasApp::keyDown(ci::app::KeyEvent event) {
       radius = 10;
       mass = 3;
       color = "black";
-      simulator_.AddParticle(radius, mass, vec2(kMargin + radius, kMargin + radius), velocity, color);
+//      simulator_.AddParticle(radius, mass, vec2(kMargin + radius, kMargin + radius), velocity, color);
+      simulator_.AddParticle(radius, mass, vec2(kTopLeftCorner.x + radius, kTopLeftCorner.y + radius), velocity, color);
       break;
 
     case ci::app::KeyEvent::KEY_DOWN:
@@ -42,7 +41,7 @@ void IdealGasApp::keyDown(ci::app::KeyEvent event) {
       radius = 20;
       mass = 10;
       color = "blue";
-      simulator_.AddParticle(radius, mass, vec2(kMargin + radius, kMargin + radius), velocity, color);
+      simulator_.AddParticle(radius, mass, vec2(kTopLeftCorner.x + radius, kTopLeftCorner.y + radius), velocity, color);
       break;
 
     case ci::app::KeyEvent::KEY_RIGHT:
@@ -50,7 +49,7 @@ void IdealGasApp::keyDown(ci::app::KeyEvent event) {
       radius = 30;
       mass = 20;
       color = "red";
-      simulator_.AddParticle(radius, mass, vec2(kMargin + radius, kMargin + radius), velocity, color);
+      simulator_.AddParticle(radius, mass, vec2(kTopLeftCorner.x + radius, kTopLeftCorner.y + radius), velocity, color);
       break;
 
     case ci::app::KeyEvent::KEY_DELETE:

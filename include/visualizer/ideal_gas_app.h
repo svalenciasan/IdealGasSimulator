@@ -21,7 +21,9 @@ class IdealGasApp : public ci::app::App {
   void keyDown(ci::app::KeyEvent event) override;
 
   const double kWindowSize = 1000;
-  const double kMargin = 200;
+  const vec2 kTopLeftCorner = vec2(400, 200);
+  const vec2 kBottomRightCorner = vec2(950, 800);
+  //const double kMargin = 200;
  private:
   Simulator simulator_;
 };
