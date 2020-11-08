@@ -27,20 +27,30 @@ void IdealGasApp::keyDown(ci::app::KeyEvent event) {
   vec2 velocity;
   float radius;
   float mass;
-
+  string color;
   switch (event.getCode()) {
     case ci::app::KeyEvent::KEY_LEFT:
       velocity = vec2(-2,-3);
       radius = 10;
       mass = 3;
-      simulator_.AddParticle(radius, mass, vec2(kMargin + radius, kMargin + radius), velocity);
+      color = "black";
+      simulator_.AddParticle(radius, mass, vec2(kMargin + radius, kMargin + radius), velocity, color);
       break;
 
-    case ci::app::KeyEvent::KEY_RIGHT:
+    case ci::app::KeyEvent::KEY_DOWN:
       velocity = vec2(-3,-2);
       radius = 20;
       mass = 10;
-      simulator_.AddParticle(radius, mass, vec2(kMargin + radius, kMargin + radius), velocity);
+      color = "blue";
+      simulator_.AddParticle(radius, mass, vec2(kMargin + radius, kMargin + radius), velocity, color);
+      break;
+
+    case ci::app::KeyEvent::KEY_RIGHT:
+      velocity = vec2(-1.5,-2.4);
+      radius = 30;
+      mass = 20;
+      color = "red";
+      simulator_.AddParticle(radius, mass, vec2(kMargin + radius, kMargin + radius), velocity, color);
       break;
 
     case ci::app::KeyEvent::KEY_DELETE:

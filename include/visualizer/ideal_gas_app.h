@@ -20,8 +20,8 @@ class IdealGasApp : public ci::app::App {
   void draw() override;
   void keyDown(ci::app::KeyEvent event) override;
 
-  const double kWindowSize = 875;
-  const double kMargin = 100;
+  const double kWindowSize = 1000;
+  const double kMargin = 200;
   const size_t kImageDimension = 28;
  private:
   Simulator simulator_;
