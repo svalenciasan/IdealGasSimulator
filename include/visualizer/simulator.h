@@ -19,9 +19,7 @@ namespace visualizer {
  */
 class Simulator {
  public:
-  //const ParticleManager& particleManager
-  Simulator(const vec2& top_left_corner, size_t num_pixels_per_side,
-            double sketchpad_size);
+  Simulator(const vec2& top_left_corner, const vec2& bottom_right_corner);
   Simulator();
 
   void Update();
@@ -39,6 +37,7 @@ class Simulator {
  private:
   ParticleManager particleManager_;
   vec2 top_left_corner_;
+  vec2 bottom_right_corner_;
   size_t num_pixels_per_side_;
   /** Number of screen pixels in the width/height of one sketchpad pixel */
   double pixel_side_length_;

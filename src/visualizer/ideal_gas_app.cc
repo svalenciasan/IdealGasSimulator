@@ -6,12 +6,12 @@ using std::stringstream;
 namespace idealgas {
 
 namespace visualizer {
-
-IdealGasApp::IdealGasApp()
-    : simulator_(glm::vec2(kMargin, kMargin), kImageDimension,
-                 kWindowSize - 2 * kMargin) {
+IdealGasApp::IdealGasApp() : simulator_(vec2(kMargin, kMargin),
+                 vec2(kMargin + (kWindowSize - 2 * kMargin),
+                      kMargin + (kWindowSize - 2 * kMargin))) {
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 }
+
 void IdealGasApp::update() {
   simulator_.Update();
 }
