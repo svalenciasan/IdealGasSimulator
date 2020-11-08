@@ -35,6 +35,7 @@ class Simulator {
   void Clear();
 
   void AddParticle(float radius, float mass, vec2 position, vec2 velocity);
+  void AddParticle(float radius, float mass, vec2 position, vec2 velocity, string color);
  private:
   ParticleManager particleManager_;
   vec2 top_left_corner_;

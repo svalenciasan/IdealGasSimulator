@@ -23,6 +23,7 @@ class Particle {
   vec2 GetPosition() const;
   float GetRadius() const;
   float GetMass() const;
+  string GetColor() const;
   string SetColor(const string& color);
   vec2 SetVelocity(const vec2& velocity);
   vec2 SetPosition(const vec2& position);
