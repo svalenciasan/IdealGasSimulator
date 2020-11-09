@@ -4,6 +4,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "simulator.h"
+#include "histogram.h"
 
 namespace idealgas {
 
@@ -26,6 +27,10 @@ class IdealGasApp : public ci::app::App {
   //const double kMargin = 200;
  private:
   Simulator simulator_;
+  Histogram firstHistogram_;
+  Histogram secondHistogram_;
+  Histogram thirdHistogram_;
+
 };
 
 }  // namespace visualizer

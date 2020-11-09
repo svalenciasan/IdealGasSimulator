@@ -1,13 +1,12 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
-#include "core/particle_manager.h"
 #include "core/particle.h"
-#include "core/histogram.h"
+#include "core/particle_manager.h"
+#include "histogram.h"
 
 using idealgas::particle::Particle;
 using idealgas::particlemanager::ParticleManager;
-using idealgas::histogram::Histogram;
 using glm::vec2;
 
 namespace idealgas {
@@ -24,7 +23,7 @@ class Simulator {
   Simulator(const vec2& top_left_corner, const vec2& bottom_right_corner);
   Simulator();
 
-  void Update();
+  ParticleManager Update();
   /**
    * Displays the current state of the sketchpad in the Cinder application.
    */
@@ -34,8 +33,8 @@ class Simulator {
    */
   void Clear();
 
-  void AddParticle(float radius, float mass, vec2 position, vec2 velocity);
-  void AddParticle(float radius, float mass, vec2 position, vec2 velocity, string color);
+  Particle& AddParticle(float radius, float mass, vec2 position, vec2 velocity);
+  Particle& AddParticle(float radius, float mass, vec2 position, vec2 velocity, string color);
  private:
   ParticleManager particleManager_;
 //  Histogram firstHistogram_;

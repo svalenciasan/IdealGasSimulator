@@ -145,32 +145,6 @@ vec2 ParticleManager::CalculateBarrierCollision(const Particle& particle) const 
   return new_velocity;
 }
 
-vec2 ParticleManager::FixOvershoot(const Particle& particle) const {
-  vec2 position = particle.GetPosition();
-  float radius = particle.GetRadius();
-
-  float left_bound = top_left_corner_.x;
-  float right_bound = bottom_right_corner_.x;
-  float upper_bound = top_left_corner_.y;
-  float lower_bound = bottom_right_corner_.y;
-
-  vec2 new_position = position;
-  //X bounds
-  if (position.x <= left_bound + radius) {
-    new_position = vec2(left_bound + (left_bound - position.x) + radius, new_position.y);
-  }
-  if (position.x >= right_bound - radius) {
-    new_position = vec2(right_bound - (position.x - right_bound) - radius, new_position.y);
-  }
-  //Y bounds
-  if (position.y >= lower_bound - radius) {
-    new_position = vec2(new_position.x, lower_bound - (new_position.y - lower_bound) - radius);
-  }
-  if (position.y <= upper_bound + radius) {
-    new_position = vec2(new_position.x, upper_bound + (upper_bound - new_position.y) + radius);  }
-
-  return new_position;
-}
 }//namespace particlemanager
 
 }//namespace idealgas
