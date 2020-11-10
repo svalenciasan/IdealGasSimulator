@@ -27,9 +27,9 @@ class Histogram {
 
   void Update(const ParticleManager& particleManager, string color);
   void Draw();
+  void DrawAxisLabels();
   void AddParticle(Particle& particle);
   size_t GetNumberInRange(float greater_than, float less_than);
-
  private:
   vector<Particle> particles_;
   string color_ = "black";

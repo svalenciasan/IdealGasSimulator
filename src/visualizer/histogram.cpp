@@ -1,4 +1,14 @@
+#define _USE_MATH_DEFINES
+
 #include "visualizer/histogram.h"
+#include "cinder/gl/gl.h"
+#include "cinder/app/App.h"
+#include "cinder/app/RendererGl.h"
+#include "core/particle.h"
+#include "core/particle_manager.h"
+#include "cmath"
+#include <vector>
+#include <map>
 
 #include "core/particle.h"
 
@@ -36,6 +46,8 @@ void Histogram::Draw() {
   ci::gl::color(ci::Color("black"));
   ci::gl::drawStrokedRect(pixel_bounding_box);
 
+  DrawAxisLabels();
+
   if (particles_.empty()) {
     return;
   }
@@ -72,6 +84,35 @@ void Histogram::Draw() {
     //Left bound for rectangle update
     left_x_coord += rectangle_width_;
   }
+}
+
+void Histogram::DrawAxisLabels() {
+  float length = kBottomRightCorner.x - kTopLeftCorner.x;
+  float half_length = length / 2;
+
+  float height = kBottomRightCorner.y - kTopLeftCorner.y;
+  float half_height = height / 2;
+  //X-axis
+  ci::gl::drawStringCentered(
+      "Particle speed",
+      vec2(kBottomRightCorner.x - half_length, kBottomRightCorner.y - (kMargin / 2)),
+      ci::Color(color_.c_str()));
+
+
+  ci::gl::rotate( (float)-M_PI_2);
+
+  // ci::gl::drawStringCentered(
+  //                    "Particle number",
+  //                    glm::vec2(-(int) length_ / 2, 0) - vec2(top_left_corner.y, top_left_corner.x),
+  //                    ci::Color("black"));
+  vec2 position = vec2(-(int) half_height, 0) - vec2(kTopLeftCorner.y, kTopLeftCorner.x);
+  position = vec2(position.x, position.y * -1);
+  ci::gl::drawStringCentered(
+      "Particle number",
+      position,
+      ci::Color(color_.c_str()));
+
+  ci::gl::rotate((float)M_PI_2);
 }
 
 void Histogram::AddParticle(Particle& particle) {
