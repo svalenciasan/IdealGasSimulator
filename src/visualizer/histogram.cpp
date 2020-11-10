@@ -99,20 +99,20 @@ void Histogram::DrawAxisLabels() {
       ci::Color(color_.c_str()));
 
 
-  ci::gl::rotate( (float)-M_PI_2);
+  ci::gl::rotate( static_cast<float>(-M_PI_2));
 
   // ci::gl::drawStringCentered(
   //                    "Particle number",
   //                    glm::vec2(-(int) length_ / 2, 0) - vec2(top_left_corner.y, top_left_corner.x),
   //                    ci::Color("black"));
-  vec2 position = vec2(-(int) half_height, 0) - vec2(kTopLeftCorner.y, kTopLeftCorner.x);
+  vec2 position = vec2(static_cast<int>(-half_height), 0) - vec2(kTopLeftCorner.y, kTopLeftCorner.x);
   position = vec2(position.x, position.y * -1);
   ci::gl::drawStringCentered(
       "Particle number",
       position,
       ci::Color(color_.c_str()));
 
-  ci::gl::rotate((float)M_PI_2);
+  ci::gl::rotate(static_cast<float>(M_PI_2));
 }
 
 void Histogram::AddParticle(Particle& particle) {
