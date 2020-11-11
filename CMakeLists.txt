@@ -60,6 +60,7 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
 
 list(APPEND TEST_FILES tests/test_particle.cpp)
 list(APPEND TEST_FILES tests/test_particle_manager.cpp)
+list(APPEND TEST_FILES tests/test_histogram.cpp)
 
 ci_make_app(
         APP_NAME        simulator

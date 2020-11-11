@@ -33,12 +33,27 @@ class Histogram {
  private:
   vector<Particle> particles_;
   string color_ = "black";
+  /**
+   * Position of Histogram.
+   */
   const vec2 kTopLeftCorner;
   const vec2 kBottomRightCorner;
+  /**
+   * Margin from the bounds of the histogram and the actual graph
+   */
   const float kMargin = 20;
+  /**
+   * How many rectangles are used to display the data.
+   */
   size_t num_of_rectangles_;
+  /**
+   * Width of each rectangle used to display the data.
+   */
   float rectangle_width_;
-  //The highest value/number of rectangles
+  /**
+   * The range of every rectangle partition.
+   * The highest value/number of rectangles.
+   */
   float partitions_ = 0;
   float highest_vel_ = 0;
   float lowest_vel_ = 0;
