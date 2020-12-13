@@ -6,6 +6,9 @@ namespace particle {
 /**
  * Constructors
  */
+Particle::Particle() : kRadius(5), kMass(1.008f) {
+
+}
 Particle::Particle(float radius, vec2& position, vec2& velocity) : kRadius(radius), kMass(1.008f) {
   position_ = position;
   velocity_ = velocity;

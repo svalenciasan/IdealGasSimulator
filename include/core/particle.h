@@ -12,10 +12,13 @@ namespace particle {
 class Particle {
  public:
   //Constructors
-  Particle() = default;
+  Particle();
   Particle(float radius, vec2& position, vec2& velocity);
   Particle(float radius, float mass, vec2& position, vec2& velocity);
   //Functions
+  /**
+   * Updates the position of the particle.
+   */
   void Update();
 
   //Getters-Setters
